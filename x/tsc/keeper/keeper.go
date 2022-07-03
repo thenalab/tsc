@@ -20,6 +20,16 @@ type (
 	}
 )
 
+func (k Keeper) GetMaxSupply(ctx sdk.Context) string {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (k Keeper) GetExcludeCirculatingAddr(ctx sdk.Context) []sdk.AccAddress {
+	//TODO implement me
+	panic("implement me")
+}
+
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
@@ -44,3 +54,5 @@ func NewKeeper(
 func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
+
+

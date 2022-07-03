@@ -32,7 +32,6 @@ import (
 	authzkeeper "github.com/cosmos/cosmos-sdk/x/authz/keeper"
 	authzmodule "github.com/cosmos/cosmos-sdk/x/authz/module"
 	"github.com/cosmos/cosmos-sdk/x/bank"
-	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/cosmos/cosmos-sdk/x/capability"
 	capabilitykeeper "github.com/cosmos/cosmos-sdk/x/capability/keeper"
@@ -57,7 +56,6 @@ import (
 	govkeeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/cosmos/cosmos-sdk/x/mint"
-	mintkeeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
 	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	"github.com/cosmos/cosmos-sdk/x/params"
 	paramsclient "github.com/cosmos/cosmos-sdk/x/params/client"
@@ -90,6 +88,8 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	tmos "github.com/tendermint/tendermint/libs/os"
 	dbm "github.com/tendermint/tm-db"
+	custombank "github.com/thenalab/tsc/x/bank/keeper"
+	custommint "github.com/thenalab/tsc/x/mint/keeper"
 
 	"github.com/ignite/cli/ignite/pkg/cosmoscmd"
 	"github.com/ignite/cli/ignite/pkg/openapiconsole"
@@ -103,11 +103,12 @@ import (
 	tscmodule "github.com/thenalab/tsc/x/tsc"
 	tscmodulekeeper "github.com/thenalab/tsc/x/tsc/keeper"
 	tscmoduletypes "github.com/thenalab/tsc/x/tsc/types"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
 const (
-	AccountAddressPrefix = "cosmos"
+	AccountAddressPrefix = "tsc"
 	Name                 = "tsc"
 )
 
@@ -209,11 +210,11 @@ type App struct {
 	// keepers
 	AccountKeeper    authkeeper.AccountKeeper
 	AuthzKeeper      authzkeeper.Keeper
-	BankKeeper       bankkeeper.Keeper
+	BankKeeper       custombank.BaseKeeper
 	CapabilityKeeper *capabilitykeeper.Keeper
 	StakingKeeper    stakingkeeper.Keeper
 	SlashingKeeper   slashingkeeper.Keeper
-	MintKeeper       mintkeeper.Keeper
+	MintKeeper       custommint.Keeper
 	DistrKeeper      distrkeeper.Keeper
 	GovKeeper        govkeeper.Keeper
 	CrisisKeeper     crisiskeeper.Keeper
@@ -231,6 +232,7 @@ type App struct {
 	ScopedMonitoringKeeper capabilitykeeper.ScopedKeeper
 
 	TscKeeper tscmodulekeeper.Keeper
+
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -306,16 +308,17 @@ func New(
 		keys[authz.ModuleName], appCodec, app.MsgServiceRouter(),
 	)
 
-	app.BankKeeper = bankkeeper.NewBaseKeeper(
-		appCodec, keys[banktypes.StoreKey], app.AccountKeeper, app.GetSubspace(banktypes.ModuleName), app.ModuleAccountAddrs(),
+	app.BankKeeper = custombank.NewBaseKeeper(
+		appCodec, keys[banktypes.StoreKey], app.AccountKeeper, app.GetSubspace(banktypes.ModuleName), app.ModuleAccountAddrs(), app.TscKeeper,
 	)
 	stakingKeeper := stakingkeeper.NewKeeper(
 		appCodec, keys[stakingtypes.StoreKey], app.AccountKeeper, app.BankKeeper, app.GetSubspace(stakingtypes.ModuleName),
 	)
-	app.MintKeeper = mintkeeper.NewKeeper(
+	app.MintKeeper = custommint.NewKeeper(
 		appCodec, keys[minttypes.StoreKey], app.GetSubspace(minttypes.ModuleName), &stakingKeeper,
-		app.AccountKeeper, app.BankKeeper, authtypes.FeeCollectorName,
+		app.AccountKeeper, app.BankKeeper,app.TscKeeper, authtypes.FeeCollectorName,
 	)
+
 	app.DistrKeeper = distrkeeper.NewKeeper(
 		appCodec, keys[distrtypes.StoreKey], app.GetSubspace(distrtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
 		&stakingKeeper, authtypes.FeeCollectorName, app.ModuleAccountAddrs(),
@@ -396,6 +399,7 @@ func New(
 		app.GetSubspace(tscmoduletypes.ModuleName),
 	)
 	tscModule := tscmodule.NewAppModule(appCodec, app.TscKeeper, app.AccountKeeper, app.BankKeeper)
+
 
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 

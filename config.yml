@@ -1,16 +1,45 @@
 accounts:
-  - name: alice
-    coins: ["20000token", "200000000stake"]
-  - name: bob
-    coins: ["10000token", "100000000stake"]
+  - name: Hanoi
+    coins: ["5000000000000utsc"]
+  - name: Saigon
+    coins: ["5000000000000utsc"]
+  - name: Danang
+    coins: ["5000000000000utsc"]
 validator:
-  name: alice
-  staked: "100000000stake"
+  name: Hanoi
+  staked: "100000000utsc"
 client:
   openapi:
     path: "docs/static/openapi.yml"
-  vuex:
-    path: "vue/src/store"
 faucet:
-  name: bob
-  coins: ["5token", "100000stake"]
+  name: Danang
+  coins: ["50000000utsc"]
+init:
+  app:
+    minimum-gas-prices: "0.0001utsc"
+genesis:
+  chain_id: "tsc-testnet"
+  app_state:
+    aura:
+      params:
+        max_supply: "100000000000000000000000000000"
+    crisis:
+      constant_fee:
+        denom: utsc
+    gov:
+      deposit_params:
+        min_deposit: [
+          {
+            "denom": "utsc",
+            "amount": "10000000"
+          }
+        ]
+        max_deposit_period: "600s"
+      voting_params:
+        voting_period: "600s"
+    mint:
+      params:
+        mint_denom: "utsc"
+    staking:
+      params:
+        bond_denom: "utsc"

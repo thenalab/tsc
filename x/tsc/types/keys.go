@@ -20,7 +20,3 @@ const (
 func KeyPrefix(p string) []byte {
 	return []byte(p)
 }
-
-const (
-	NextNFTKey = "NextNFT-value-"
-)
