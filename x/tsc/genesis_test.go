@@ -14,6 +14,17 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
+		NextNFT: &types.NextNFT{
+			IdValue: 75,
+		},
+		StoredNFTList: []types.StoredNFT{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -25,5 +36,7 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
+	require.Equal(t, genesisState.NextNFT, got.NextNFT)
+	require.ElementsMatch(t, genesisState.StoredNFTList, got.StoredNFTList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

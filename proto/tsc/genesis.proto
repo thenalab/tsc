@@ -3,6 +3,8 @@ package thenalab.tsc.tsc;
 
 import "gogoproto/gogo.proto";
 import "tsc/params.proto";
+import "tsc/next_nft.proto";
+import "tsc/stored_nft.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/thenalab/tsc/x/tsc/types";
@@ -10,5 +12,7 @@ option go_package = "github.com/thenalab/tsc/x/tsc/types";
 // GenesisState defines the tsc module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  NextNFT nextNFT = 2;
+  repeated StoredNFT storedNFTList = 3 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

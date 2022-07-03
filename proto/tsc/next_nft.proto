@@ -1,0 +1,9 @@
+syntax = "proto3";
+package thenalab.tsc.tsc;
+
+option go_package = "github.com/thenalab/tsc/x/tsc/types";
+
+message NextNFT {
+  uint64 idValue = 1; 
+  
+}

@@ -1,9 +1,11 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
+import { NextNFT } from "./module/types/tsc/next_nft"
 import { Params } from "./module/types/tsc/params"
+import { StoredNFT } from "./module/types/tsc/stored_nft"
 
 
-export { Params };
+export { NextNFT, Params, StoredNFT };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -42,9 +44,14 @@ function getStructure(template) {
 const getDefaultState = () => {
 	return {
 				Params: {},
+				NextNFT: {},
+				StoredNFT: {},
+				StoredNFTAll: {},
 				
 				_Structure: {
+						NextNFT: getStructure(NextNFT.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
+						StoredNFT: getStructure(StoredNFT.fromPartial({})),
 						
 		},
 		_Registry: registry,
@@ -78,6 +85,24 @@ export default {
 						(<any> params).query=null
 					}
 			return state.Params[JSON.stringify(params)] ?? {}
+		},
+				getNextNFT: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.NextNFT[JSON.stringify(params)] ?? {}
+		},
+				getStoredNFT: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.StoredNFT[JSON.stringify(params)] ?? {}
+		},
+				getStoredNFTAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.StoredNFTAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -130,6 +155,76 @@ export default {
 				return getters['getParams']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryParams API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryNextNFT({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryNextNFT()).data
+				
+					
+				commit('QUERY', { query: 'NextNFT', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryNextNFT', payload: { options: { all }, params: {...key},query }})
+				return getters['getNextNFT']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryNextNFT API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryStoredNFT({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryStoredNFT( key.index)).data
+				
+					
+				commit('QUERY', { query: 'StoredNFT', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStoredNFT', payload: { options: { all }, params: {...key},query }})
+				return getters['getStoredNFT']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryStoredNFT API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryStoredNFTAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryStoredNFTAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryStoredNFTAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'StoredNFTAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStoredNFTAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getStoredNFTAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryStoredNFTAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

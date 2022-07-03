@@ -5,6 +5,8 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "tsc/params.proto";
+import "tsc/next_nft.proto";
+import "tsc/stored_nft.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/thenalab/tsc/x/tsc/types";
@@ -15,7 +17,21 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/thenalab/tsc/tsc/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a NextNFT by index.
+	rpc NextNFT(QueryGetNextNFTRequest) returns (QueryGetNextNFTResponse) {
+		option (google.api.http).get = "/thenalab/tsc/tsc/next_nft";
+	}
+// Queries a StoredNFT by index.
+	rpc StoredNFT(QueryGetStoredNFTRequest) returns (QueryGetStoredNFTResponse) {
+		option (google.api.http).get = "/thenalab/tsc/tsc/stored_nft/{index}";
+	}
+
+	// Queries a list of StoredNFT items.
+	rpc StoredNFTAll(QueryAllStoredNFTRequest) returns (QueryAllStoredNFTResponse) {
+		option (google.api.http).get = "/thenalab/tsc/tsc/stored_nft";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +41,29 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetNextNFTRequest {}
+
+message QueryGetNextNFTResponse {
+	NextNFT NextNFT = 1 [(gogoproto.nullable) = false];
+}
+message QueryGetStoredNFTRequest {
+	  string index = 1;
+
+}
+
+message QueryGetStoredNFTResponse {
+	StoredNFT storedNFT = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllStoredNFTRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllStoredNFTResponse {
+	repeated StoredNFT storedNFT = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3
