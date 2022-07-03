@@ -1,0 +1,13 @@
+syntax = "proto3";
+package thenalab.tsc.tsc;
+
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "github.com/thenalab/tsc/x/tsc/types";
+
+// Msg defines the Msg service.
+service Msg {
+    // this line is used by starport scaffolding # proto/tx/rpc
+}
+
+// this line is used by starport scaffolding # proto/tx/message
