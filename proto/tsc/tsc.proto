@@ -1,0 +1,14 @@
+syntax = "proto3";
+package thenalab.tsc.tsc;
+
+// this line is used by starport scaffolding # genesis/proto/import
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/thenalab/tsc/x/tsc/types";
+
+// Params defines the parameters for the tsc module.
+message Params {
+  // max_supply defines the max supply of tsc coin.
+  string max_supply = 1 [(gogoproto.moretags) = "yaml:\"max_supply\""];
+  repeated string exclude_circulating_addr = 2 [(gogoproto.moretags) = "yaml:\"exclude_circulating_addr\""];
+}

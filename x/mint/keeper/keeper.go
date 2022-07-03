@@ -14,20 +14,20 @@ type Keeper struct {
 
 	bankKeeper    custommint.BankKeeper
 	stakingKeeper custommint.StakingKeeper
-	tscKeeper    custommint.TSCKeeper
+	tscKeeper     custommint.TSCKeeper
 }
 
 // NewKeeper creates a new mint Keeper instance
 func NewKeeper(
 	cdc codec.BinaryCodec, key sdk.StoreKey, paramSpace paramtypes.Subspace,
 	sk custommint.StakingKeeper, ak custommint.AccountKeeper, bk custommint.BankKeeper,
-	tscKeeper custommint.TSCKeeper, feeCollectorName string,
+	auraKeeper custommint.TSCKeeper, feeCollectorName string,
 ) Keeper {
 	return Keeper{
 		Keeper:        mintkeeper.NewKeeper(cdc, key, paramSpace, sk, ak, bk, feeCollectorName),
 		bankKeeper:    bk,
 		stakingKeeper: sk,
-		tscKeeper:    tscKeeper,
+		tscKeeper:     auraKeeper,
 	}
 }
 
@@ -40,11 +40,11 @@ func (k Keeper) GetMaxSupply(ctx sdk.Context) string {
 }
 
 //func (k Keeper) GetExcludeCirculatingAddr(ctx sdk.Context) []sdk.AccAddress {
-//	return k.auraKeeper.GetExcludeCirculatingAddr(ctx)
+//	return k.tscKeeper.GetExcludeCirculatingAddr(ctx)
 //}
 
 //func (k Keeper) GetExcludeCirculatingAmount(ctx sdk.Context, denom string) sdk.Coin {
-//	excludeAddrs := k.auraKeeper.GetExcludeCirculatingAddr(ctx)
+//	excludeAddrs := k.tscKeeper.GetExcludeCirculatingAddr(ctx)
 //	excludeAmount := sdk.NewInt64Coin(denom, 0)
 //	for _, addr := range excludeAddrs {
 //		k.Logger(ctx).Info("GetExcludeCirculatingAmount", "addr", addr.String())
