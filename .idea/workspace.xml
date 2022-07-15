@@ -4,7 +4,63 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="438f240b-71e9-4c27-8e10-948e34091eed" name="Changes" comment="" />
+    <list default="true" id="438f240b-71e9-4c27-8e10-948e34091eed" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/release.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ante.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/encoding.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/export.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/genesis.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/upgrades.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/tscd/cmd/genwasm.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/tscd/cmd/genwasm.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/tscd/cmd/testnet.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/tscd/cmd/vestingaccountcmd.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/tscd/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/openapi.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/tsc/genesis.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/tsc/query.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/tsc/tsc.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/tsc/tx.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/bank/keeper/grpc_query.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/bank/keeper/keeper.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/bank/module.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/bank/types/expected_keepers.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/mint/abci.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/mint/keeper/keeper.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/mint/module.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/mint/types/expected_keepers.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/client/cli/query.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/client/cli/tx.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/genesis.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/genesis_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/handler.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/keeper/grpc_query.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/keeper/keeper.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/keeper/msg_server.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/keeper/msg_server_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/module.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/codec.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/errors.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/expected_keepers.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/genesis.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/genesis.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/genesis_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/keys.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/params.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/query.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/tsc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/tx.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/tsc/types/types.go" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +93,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/macbook/Desktop/Projects/tsc/proto/tsc&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/macbook/Desktop/Projects/tsc&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -52,6 +108,7 @@
       <recent name="$PROJECT_DIR$/x" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/x" />
     </key>
   </component>
@@ -63,6 +120,16 @@
       <kind value="FILE" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="tsc" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="DIRECTORY" />
+      <package value="github.com/thenalab/tsc" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
   </component>

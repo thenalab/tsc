@@ -1,6 +1,6 @@
 vue/node_modules
 vue/dist
 release/
-.idea
-.github/
-config.yml
+.idea/
+.vscode/
+.DS_Store

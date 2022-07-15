@@ -1,87 +1,39 @@
 package types
 
 import (
-	"errors"
-	"fmt"
-	"regexp"
-	"strings"
-
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
+	"gopkg.in/yaml.v2"
 )
 
-// Parameter store keys
-var (
-	MaxSupply              = []byte("MaxSupply")
-	ExcludeCirculatingAddr = []byte("ExcludeCirculatingAddr")
-)
+var _ paramtypes.ParamSet = (*Params)(nil)
 
-// Regex using check string is number
-var digitCheck = regexp.MustCompile(`^[0-9]+$`)
-
-// ParamTable for tsc module.
+// ParamKeyTable the param key table for launch module
 func ParamKeyTable() paramtypes.KeyTable {
 	return paramtypes.NewKeyTable().RegisterParamSet(&Params{})
 }
 
-func NewParams(maxSupply string, excludeCirculatingAddr []string) Params {
-	return Params{
-		MaxSupply:              maxSupply,
-		ExcludeCirculatingAddr: excludeCirculatingAddr,
-	}
+// NewParams creates a new Params instance
+func NewParams() Params {
+	return Params{}
 }
 
-// default tsc module parameters
+// DefaultParams returns a default set of parameters
 func DefaultParams() Params {
-	return Params{
-		MaxSupply:              "1000000000000000000000000000",
-		ExcludeCirculatingAddr: []string{},
-	}
+	return NewParams()
 }
 
-// validate params
-func (p Params) Validate() error {
-	if err := validateMaxSupply(p.MaxSupply); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// Implements params.ParamSet
+// ParamSetPairs get the params.ParamSet
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
-	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair(MaxSupply, &p.MaxSupply, validateMaxSupply),
-		paramtypes.NewParamSetPair(ExcludeCirculatingAddr, &p.ExcludeCirculatingAddr, validateExcludeCirculatingAddr),
-	}
+	return paramtypes.ParamSetPairs{}
 }
 
-func validateMaxSupply(i interface{}) error {
-	v, ok := i.(string)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
-	if strings.TrimSpace(v) == "" {
-		return errors.New("max supply cannot be blank")
-	}
-
-	if !digitCheck.MatchString(strings.TrimSpace(v)) {
-		return errors.New("invalid max supply parameter, expected string as number")
-	}
-
+// Validate validates the set of params
+func (p Params) Validate() error {
 	return nil
 }
 
-func validateExcludeCirculatingAddr(i interface{}) error {
-	v, ok := i.([]string)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
-	for _, addBech32 := range v {
-		if strings.TrimSpace(addBech32) == "" {
-			return errors.New("exclude circulating address can not contain blank")
-		}
-	}
-	return nil
+// String implements the Stringer interface.
+func (p Params) String() string {
+	out, _ := yaml.Marshal(p)
+	return string(out)
 }
