@@ -3,13 +3,13 @@ import { Reader, Writer } from "protobufjs/minimal";
 import {
   PageRequest,
   PageResponse,
-} from "../../base/query/v1beta1/pagination";
-import { Tx } from "./tx";
+} from "../../../cosmos/base/query/v1beta1/pagination";
+import { Tx } from "../../../cosmos/tx/v1beta1/tx";
 import {
   TxResponse,
   GasInfo,
   Result,
-} from "../../base/abci/v1beta1/abci";
+} from "../../../cosmos/base/abci/v1beta1/abci";
 
 export const protobufPackage = "cosmos.tx.v1beta1";
 

@@ -4,11 +4,11 @@ import * as Long from "long";
 import {
   ConnectionEnd,
   IdentifiedConnection,
-} from "./connection";
+} from "../../../../ibc/core/connection/v1/connection";
 import {
   Height,
   IdentifiedClientState,
-} from "../../client/v1/client";
+} from "../../../../ibc/core/client/v1/client";
 import {
   PageRequest,
   PageResponse,

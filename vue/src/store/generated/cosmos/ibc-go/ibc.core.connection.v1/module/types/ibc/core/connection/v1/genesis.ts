@@ -5,7 +5,7 @@ import {
   IdentifiedConnection,
   ConnectionPaths,
   Params,
-} from "./connection";
+} from "../../../../ibc/core/connection/v1/connection";
 
 export const protobufPackage = "ibc.core.connection.v1";
 

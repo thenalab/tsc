@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Params } from "./params";
+import { Params } from "../tsc/params";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "thenalab.tsc.tsc";

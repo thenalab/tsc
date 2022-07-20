@@ -4,7 +4,7 @@ import * as Long from "long";
 import {
   PageRequest,
   PageResponse,
-} from "../../query/v1beta1/pagination";
+} from "../../../../cosmos/base/query/v1beta1/pagination";
 import { Any } from "../../../../google/protobuf/any";
 import { BlockID } from "../../../../tendermint/types/types";
 import { Block } from "../../../../tendermint/types/block";
